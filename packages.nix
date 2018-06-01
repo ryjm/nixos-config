@@ -123,7 +123,7 @@ in {
     sbcl
     screen
     siege
-    spotify
+    # spotify
     stdmanpages
     systemd.dev
     tdesktop

@@ -15,11 +15,11 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
   boot.cleanTmpDir = true;
   hardware.pulseaudio.enable = true;
-  time.timeZone = "Europe/Oslo";
+  time.timeZone = "America/New_York";
 
   # Configure audio setup for JACK + Overtone
   boot.kernelModules = [ "snd-seq" "snd-rawmidi" ];
@@ -84,15 +84,17 @@
   };
 
   services.postgresql.enable = true;
-
-  # Configure user account
   users.defaultUserShell = pkgs.fish;
-  users.extraUsers.vincent = {
+  
+  # Configure user account
+  users.extraUsers.jake = {
     extraGroups = [ "wheel" "docker" ];
     isNormalUser = true;
-    uid = 1000;
+    uid = 1001;
     shell = pkgs.fish;
+    initialHashedPassword = "";
   };
+  
 
   security.sudo = {
     enable = true;

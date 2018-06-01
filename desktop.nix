@@ -10,10 +10,13 @@ in {
   # Configure basic X-server stuff:
   services.xserver = {
     enable = true;
+    displayManager.sddm.enable = true;
+    windowManager.default = "exwm";
     layout = "us,no,ru";
     xkbOptions = "caps:super, grp:shifts_toggle, parens:swap_brackets";
+    videoDrivers = [ "virtualbox" "vmware" "cirrus" "vesa" "modesetting" ];
     exportConfiguration = true;
-
+    
     # Give EXWM permission to control the session.
     displayManager.sessionCommands = "${pkgs.xorg.xhost}/bin/xhost +SI:localuser:$USER";
   };
@@ -21,11 +24,7 @@ in {
   # Add a shell script with random screen lock wallpaper selection
   environment.systemPackages = [ screenLock ];
 
-  # Apparently when you have house guests they complain about your screen tearing!
-  services.compton.enable = true;
-  services.compton.backend = "xrender";
-
-  # Configure desktop environment:
+    # Configure desktop environment:
   services.xserver.windowManager.session = lib.singleton {
     name = "exwm";
     start = ''
@@ -34,12 +33,11 @@ in {
     '';
   };
 
-  # Configure Redshift for Oslo
-  services.redshift = {
-    enable = true;
-    latitude = "59.911491";
-    longitude = "10.757933";
-  };
+
+  # Apparently when you have house guests they complain about your screen tearing!
+  services.compton.enable = true;
+  services.compton.backend = "xrender";
+
 
   # Configure fonts
   fonts = {

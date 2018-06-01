@@ -5,7 +5,7 @@
 { config, pkgs, ...}:
 
 let dotfiles = pkgs.stdenv.mkDerivation {
-  name = "tazjins-dotfiles";
+  name = "ryjm-dotfiles";
 
   srcs = [
     ./dotfiles
